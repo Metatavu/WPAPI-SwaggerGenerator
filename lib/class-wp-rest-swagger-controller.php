@@ -294,6 +294,23 @@ class WP_REST_Swagger_Controller extends WP_REST_Controller {
 						,'responses'=>$responses
 						
 					);
+                                        
+                                        if($methodName=='GET') {
+						$swagger['paths'][$endpointName]['head'] = array(
+							'parameters'=>$parameters
+							,'security'=>$security
+							,'responses'=>array(
+								200=>array(
+									'description'=> "successful operation"
+								)
+								,'default'=>array(
+									'description'=> "error"
+									,'schema'=>array('$ref'=>'#/definitions/error')
+								)
+							)
+						
+						);
+                                        }
 					
 				}
 			}
